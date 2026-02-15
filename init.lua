@@ -683,6 +683,7 @@ require('lazy').setup({
         gopls = {},
         basedpyright = {},
         jdtls = {},
+        eslint = {},
 
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -787,10 +788,16 @@ require('lazy').setup({
         c = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
-        --
+
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        markdown = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        ['*'] = { 'trim_whitespace' },
         java = { 'palantir-java-format' },
       },
     },
