@@ -601,9 +601,32 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
-        basedpyright = {},
+        basedpyright = {
+          cmd = { 'basedpyright-langserver', '--stdio' },
+          filetypes = { 'python' },
+          root_markers = {
+            'pyproject.toml',
+            'setup.py',
+            'setup.cfg',
+            'requirements.txt',
+            'Pipfile',
+            'pyrightconfig.json',
+            '.git',
+          },
+          settings = {
+            basedpyright = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+              },
+            },
+          },
+        },
+        ruff = {},
         jdtls = {},
         eslint = {},
+        hls = {},
 
         -- rust_analyzer = {},
         --
@@ -676,18 +699,18 @@ require('lazy').setup({
           Lua = {},
         },
       })
-      vim.lsp.config('hls', {
-        cmd = { 'haskell-language-server-wrapper', '--lsp' },
-        filetypes = { 'haskell', 'lhaskell' },
-        root_markers = { 'hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml' },
-        settings = {
-          haskell = {
-            formattingProvider = 'ormolu',
-            cabalFormattingProvider = 'cabal-fmt',
-          },
-        },
-      })
-      vim.lsp.enable 'hls'
+      -- vim.lsp.config('hls', {
+      --   cmd = { 'haskell-language-server-wrapper', '--lsp' },
+      --   filetypes = { 'haskell', 'lhaskell' },
+      --   root_markers = { 'hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml' },
+      --   settings = {
+      --     haskell = {
+      --       formattingProvider = 'ormolu',
+      --       cabalFormattingProvider = 'cabal-fmt',
+      --     },
+      --   },
+      -- })
+      -- vim.lsp.enable 'hls'
       vim.lsp.enable 'lua_ls'
     end,
   },
