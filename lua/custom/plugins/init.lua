@@ -4,14 +4,16 @@
 -- See the kickstart.nvim README for more information
 return {
   {
-    'let-def/texpresso.vim',
-  },
-  {
     'lervag/vimtex',
     lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_compiler_latexmk = { -- latexmk configuration
+        build_dir = 'build', -- Build artifacts directory
+        out_dir = 'build', -- Output directory for PDF and aux files
+        aux_dir = 'build', -- Auxiliary files directory
+      }
       vim.g.vimtex_view_method = 'zathura'
     end,
   },

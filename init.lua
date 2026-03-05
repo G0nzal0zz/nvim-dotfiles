@@ -627,6 +627,8 @@ require('lazy').setup({
         jdtls = {},
         eslint = {},
         hls = {},
+        texlab = {},
+        harper_ls = {}, -- Grammar checker
 
         -- rust_analyzer = {},
         --
