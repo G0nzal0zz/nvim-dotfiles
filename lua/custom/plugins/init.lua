@@ -9,7 +9,14 @@ return {
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_compiler_latexmk = { -- latexmk configuration
+      vim.g.vimtex_compiler_latexmk = {
+        options = {
+          '-verbose',
+          '-file-line-error',
+          '-synctex=1',
+          '-interaction=nonstopmode',
+          '-shell-escape',
+        },
         build_dir = 'build', -- Build artifacts directory
         out_dir = 'build', -- Output directory for PDF and aux files
         aux_dir = 'build', -- Auxiliary files directory

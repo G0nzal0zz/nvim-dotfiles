@@ -762,6 +762,7 @@ require('lazy').setup({
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         ['*'] = { 'trim_whitespace' },
         java = { 'palantir-java-format' },
+        go = { 'gofmt' },
       },
     },
   },
@@ -943,6 +944,7 @@ require('lazy').setup({
           'python',
           'java',
           'cpp',
+          'latex',
         }, require('nvim-treesitter').install(filetypes)
       vim.api.nvim_create_autocmd('FileType', {
         pattern = filetypes,
@@ -1001,3 +1003,4 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--let g:vimtex_view_forward_search_on_start = 1
