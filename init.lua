@@ -634,6 +634,8 @@ require('lazy').setup({
         eslint = {},
         hls = {},
         texlab = {},
+        coq_lsp = {},
+        ormolu = {},  -- Haskell formatter
 
         -- rust_analyzer = {},
         --
@@ -766,6 +768,7 @@ require('lazy').setup({
         ['*'] = { 'trim_whitespace' },
         java = { 'palantir-java-format' },
         go = { 'gofmt' },
+        haskell = { 'ormolu' }
       },
     },
   },
