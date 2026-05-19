@@ -768,7 +768,8 @@ require('lazy').setup({
         ['*'] = { 'trim_whitespace' },
         java = { 'palantir-java-format' },
         go = { 'gofmt' },
-        haskell = { 'ormolu' }
+        haskell = { 'ormolu' },
+        json = { 'clang-format' },
       },
     },
   },
