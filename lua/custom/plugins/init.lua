@@ -57,15 +57,49 @@ return {
     end,
   },
   {
-      'MeanderingProgrammer/render-markdown.nvim',
-      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite
-      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
-      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-      ---@module 'render-markdown'
-      ---@type render.md.UserConfig
-      opts = {},
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
   },
   {
-    'whonore/Coqtail'
-  }
+    'whonore/Coqtail',
+    ft = 'coq',
+    -- The configuration below was extracted from the following repository:
+    -- https://github.com/dpella/docker-nvim-haskell-latex-LLM/blob/44ed5706623f8d0e96669273088a77d517f83355/otherfiles/init.lua#L171
+    -- TODO: Remove this configuration once the issue has been fixed upstream in the Coqtail repository.
+    config = function()
+      -- Workaround for Coqtail's CoqtailJoinspaces augroup using a
+      -- non-bang `unlet b:_coqtail_save_js` on BufLeave, which errors
+      -- with E108 when BufEnter never set the var (e.g. closing neo-tree 
+      -- and focusing a Rocq file). Replace it with an augroup using `unlet!`.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'coq',
+        callback = function(args)
+          pcall(vim.api.nvim_clear_autocmds, { group = 'CoqtailJoinspaces', buffer = args.buf })
+          vim.cmd(string.format(
+            [[
+						augroup CoqtailJoinspacesFix
+						  autocmd! * <buffer=%d>
+						  autocmd BufEnter <buffer=%d>
+						        \ if !exists('b:_coqtail_save_js')
+						        \ |   let b:_coqtail_save_js = &js
+						        \ | endif
+						        \ | let &joinspaces = get(g:, 'coqtail_joinspaces', 0)
+						  autocmd BufLeave <buffer=%d>
+						        \ let &joinspaces = get(b:, '_coqtail_save_js', 1)
+						        \ | unlet! b:_coqtail_save_js
+						augroup END
+					]],
+            args.buf,
+            args.buf,
+            args.buf
+          ))
+        end,
+      })
+    end,
+  },
 }
