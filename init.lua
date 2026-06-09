@@ -219,13 +219,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
-
 -- [[ Custom Filetypes ]]
-vim.filetype.add({
+vim.filetype.add {
   extension = {
-    iml = "ocaml",
+    iml = 'ocaml',
+    v = 'coq',
   },
-})
+}
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -642,8 +642,7 @@ require('lazy').setup({
         eslint = {},
         hls = {},
         texlab = {},
-        coq_lsp = {},
-        ormolu = {},  -- Haskell formatter
+        ormolu = {}, -- Haskell formatter
 
         -- rust_analyzer = {},
         --
@@ -959,7 +958,7 @@ require('lazy').setup({
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
       -- ensure basic parser are installed
-      local parsers   = {
+      local parsers = {
         'bash',
         'c',
         'go',

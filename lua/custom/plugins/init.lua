@@ -74,7 +74,7 @@ return {
     config = function()
       -- Workaround for Coqtail's CoqtailJoinspaces augroup using a
       -- non-bang `unlet b:_coqtail_save_js` on BufLeave, which errors
-      -- with E108 when BufEnter never set the var (e.g. closing neo-tree 
+      -- with E108 when BufEnter never set the var (e.g. closing neo-tree
       -- and focusing a Rocq file). Replace it with an augroup using `unlet!`.
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'coq',
@@ -102,4 +102,22 @@ return {
       })
     end,
   },
+  -- coq-lsp conflicts with Coqtail because Coqtail always loads automatically.
+  -- I haven’t found a way to disable Coqtail when using coq-lsp, so I’m not enabling
+  -- coq-lsp until a solution is found that allows both plugins to coexist in a simple way.
+  -- {
+  --   'tomtomjhj/coq-lsp.nvim',
+  --   ft = 'coq',
+  --   dependencies = { 'neovim/nvim-lspconfig' },
+  --   init = function()
+  --     -- Prevent Coqtail from loading
+  --     -- vim.g.loaded_coqtail = 1
+  --     -- vim.g['coqtail#supported'] = 0
+  --   end,
+  --   config = function()
+  --     require('coq-lsp').setup {
+  --       coq_lsp_args = { '--bt' },
+  --     }
+  --   end,
+  -- },
 }
