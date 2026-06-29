@@ -643,6 +643,7 @@ require('lazy').setup({
         hls = {},
         texlab = {},
         ormolu = {}, -- Haskell formatter
+        ocamlformat = {},
 
         -- rust_analyzer = {},
         --
@@ -777,6 +778,7 @@ require('lazy').setup({
         go = { 'gofmt' },
         haskell = { 'ormolu' },
         json = { 'clang-format' },
+        ocaml = { 'ocamlformat' },
       },
     },
   },
@@ -1075,6 +1077,7 @@ require('lazy').setup({
     },
   },
 })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
